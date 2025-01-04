@@ -1,0 +1,552 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #2e3436;
+    color: #f0f0f0;
+}
+
+.desktop {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    visibility: hidden; /* Hidden by default */
+    transition: opacity 0.5s ease, visibility 0s 0.5s;
+}
+
+.desktop.visible {
+    opacity: 1;
+    visibility: visible; /* Makes it visible after fading in */
+    transition: opacity 0.5s ease; /* Only opacity transition when visible */
+}
+
+/* Icons Section - Top Left */
+.icons {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icon img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 5px;
+    transition: transform 0.4s ease /* Adding transition for shadow and scaling */
+}
+
+.icon span {
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    color: black;
+}
+
+/* Remove default styles for links */
+a {
+    text-decoration: none; /* Removes the underline */
+    color: inherit; /* Inherits the color from the parent, so it doesn't turn blue */
+}
+
+/* Floating Dock at the Bottom */
+.dock {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.dock .icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dock img {
+    width: 55px;
+    height: 55px;
+    transition: transform 0.4s ease /* Adding transition for shadow and scaling */
+}
+
+.dock span {
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+}
+
+/* Terminal Icon Hover Effect */
+.icon:hover img, .dock .icon:hover img {
+    opacity: 0.6;
+    transform: scale(1.2);
+}
+
+/* Terminal Window (Initially Hidden) */
+.terminal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 60%;
+    max-width: 800px;
+    max-height: 500px;
+    display: none;
+    z-index: 5;
+    transform: translate(-50%, -50%) scale(0.05); /* Initial state: small and transparent */
+    transition: opacity 0.4s ease, transform 0.4s ease; /* Transition for fade-in and scaling */
+}
+
+.terminal.open {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Terminal Prompt */
+.terminal-prompt {
+    background-color: #1d1f21;
+    color: #f0f0f0;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 10px 20px;
+    border-radius: 0 0 5px 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.prompt-text {
+    color: #00ff00; /* Green color typical for Linux terminal prompts */
+}
+
+.terminal.fullscreen {
+    position: center; /* Use fixed positioning for fullscreen mode */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: none; /* Remove the transform */
+    border-radius: 0;
+    overflow: hidden;
+}
+
+/* Terminal Styling */
+.terminal-window {
+    background-color: #1d1f21;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.terminal-header {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background-color: #2e3436;
+    border-bottom: 1px solid #555;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.button {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #ccc;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1;
+    user-select: none;
+}
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: green;
+}
+
+.red::after {
+    content: "X";
+    font-weight: bold;
+    color: white;
+    font-size: 12px;
+}
+
+.yellow::after {
+    content: "--";
+    font-weight: bold;
+    color: black;
+    font-size: 12px;
+}
+
+.green::after {
+    content: "[]";
+    font-weight: bold;
+    color: white;
+    font-size: 12px;
+}
+
+.terminal-body {
+    flex: 1;
+    padding: 10px;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word; /* Breaks long words to avoid overflow */
+}
+
+/* Date and Time Display */
+.date-time {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Full-screen Booting Overlay */
+#booting-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: #00ff00; /* Terminal-like green text */
+    font-family: 'Courier New', Courier, monospace;
+    padding: 20px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    z-index: 9999; /* Ensure it covers everything else */
+}
+
+/* Styling for Booting Text */
+#booting-output {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* Certifications Window */
+.certifications-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 800px;
+    height: 70%;
+    max-height: 600px;
+    background-color: #1d1f21;
+    display: none; /* Hidden by default */
+    border-radius: 10px;
+    z-index: 6;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    color: #f0f0f0;
+    transform: translate(-50%, -50%) scale(0.05); /* Initial state: small and transparent */
+    transition: opacity 0.4s ease, transform 0.4s ease; /* Transition for fade-in and sliding effect */
+}
+
+.certifications-window.open {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Window Header */
+.window-header {
+    background-color: #2e3436;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.window-header span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #f0f0f0;
+}
+
+.certifications-content {
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.cert-image {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth hover effect */
+}
+
+.cert-image:hover {
+    transform: scale(1.1); /* Slight zoom-in effect */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); /* Stronger shadow when hovered */
+}
+
+.certifications-window .button {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.certifications-window .red {
+    background-color: red;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+
+.certifications-window .red::after {
+    content: "X";
+    font-weight: bold;
+    color: white;
+    font-size: 12px;
+}
+
+@media (max-width: 1024px) {
+    .desktop {
+        background-position: top center;
+        transition: opacity 0.5s ease, visibility 0s 0.5s;
+    }
+
+    .icons {
+        top: 40px;
+        left: 10px;
+        gap: 20px;
+        transition: transform 0.4s ease;
+    }
+
+    .dock {
+        bottom: 10px;
+        padding: 8px;
+        gap: 15px;
+    }
+
+    .dock img {
+        width: 45px;
+        height: 45px;
+        transition: transform 0.4s ease;
+    }
+}
+
+/* For screens up to 768px */
+@media (max-width: 768px) {
+    .desktop {
+        background-size: cover;
+    }
+
+    .icons {
+        top: 20px;
+        left: 10px;
+        gap: 15px;
+    }
+
+    .dock {
+        bottom: 5px;
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .dock img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .icon span, .dock span {
+        font-size: 16px;
+    }
+
+    /* Adjusting terminal for proper text wrapping */
+    .terminal-body {
+        display: block;
+        height: 100%;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        padding-bottom: 50px;
+        max-width: 100%;
+        font-size: 16px;
+    }
+
+    /* Adjusting date-time layout */
+    .date-time {
+        position: absolute;
+        bottom: 20px;
+        right: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #ffffff;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 5px 8px; /* Padding based on content size */
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        text-align: right;
+        max-width: 120px;
+    }
+
+    .date-time span {
+        margin: 2px;
+    }
+
+    .date-time .date {
+        font-size: 12px;
+    }
+
+    .date-time .time {
+        font-size: 14px;
+    }
+
+    .date-time .seconds {
+        font-size: 12px;
+    }
+}
+
+/* For small mobile screens (up to 480px) */
+@media (max-width: 480px) {
+    .desktop {
+        background-position: center center;
+    }
+
+    .icons {
+        top: 10px;
+        left: 5px;
+        gap: 10px;
+    }
+
+    .dock {
+        bottom: 5px;
+        padding: 7px;
+        gap: 10px;
+    }
+
+    .dock img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .icon span, .dock span {
+        font-size: 13px;
+    }
+
+    .date-time {
+        position: absolute;
+        bottom: 20px;
+        right: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #ffffff;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 5px 8px; /* Adjusted padding based on content size */
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        text-align: right;
+        max-width: 100px;
+    }
+
+    .date-time span {
+        margin: 1px;
+    }
+
+    .date-time .date {
+        font-size: 10px;
+    }
+
+    .date-time .time {
+        font-size: 12px;
+    }
+
+    .date-time .seconds {
+        font-size: 10px;
+    }
+
+    .terminal-body {
+        display: block;
+        height: 100%;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        padding-bottom: 50px;
+        max-width: 100%;
+        font-size: 13px;
+    }
+}
+
+
+
+
+
+
+
+
+
+

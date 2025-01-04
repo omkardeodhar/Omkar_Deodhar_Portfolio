@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omkar Deodhar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Full Screen Booting Overlay -->
+    <div id="booting-overlay">
+        <pre id="booting-output"></pre>
+    </div>
+
+    <!-- Desktop Layout -->
+    <div class="desktop">
+        <!-- Icons Section - Top Left -->
+        <div class="icons">
+            <a href="https://drive.google.com/file/d/1YecvVBB2yB3grv3ivYRC3WfwJsuddoqj/view?usp=drive_link" class="icon" id="resume">
+                <img src="resume.png" alt="Resume">
+                <span>Resume</span>
+            </a>
+            <a href="https://github.com/omkardeodhar" class="icon" id="github">
+                <img src="github.png" alt="GitHub">
+                <span>GitHub</span>
+            </a>
+            <a href="https://tryhackme.com/r/p/InfoSentinel" class="icon" id="thm">
+                <img src="thm.png" alt="THM Profile">
+                <span>THM</span>
+            </a>
+            <a href="https://linkedin.com/in/omkar-deodhar-09933b27a" class="icon" id="linkedin">
+                <img src="linkedin.png" alt="Linkedin">
+                <span>Linkedin</span>
+            </a>
+        </div>
+
+        <!-- Floating Dock at the Bottom -->
+        <div class="dock">
+            <div class="icon" id="terminal-icon">
+                <img src="terminal.png" alt="Terminal">
+                <span>Terminal</span>
+            </div>
+            <div class="icon" id="folder-icon">
+                <img src="folder.png" alt="Folder">
+                <span>Certifications</span>
+            </div>
+        </div>
+
+        <!-- Terminal Section (Initially Hidden) -->
+        <div class="terminal" id="terminal">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="button yellow" id="minimize-terminal"></div>
+                    <div class="button green" id="fullscreen-terminal"></div>
+                    <div class="button red" id="close-terminal"></div>
+                </div>
+                <div class="terminal-prompt">
+                    <span class="prompt-text">Summary@Omkar-Deodhar:~$</span>
+                </div>
+                <div class="terminal-body">
+                    <pre id="terminal-output"></pre>
+                </div>
+            </div>
+        </div>
+        
+        <div class="certifications-window" id="certifications-window">
+            <div class="window-header">
+                <div class="button red" id="close-certifications"></div>
+                <span>Certifications</span>
+            </div>
+            <div class="certifications-content">
+                <a href="https://coursera.org/account/accomplishments/professional-cert/7567B8HDH3T5" class="cert-image" alt="Certification 1">
+                    <img src="google.jpeg" alt="Certification 1" class="cert-image">
+                </a>
+                <a href="https://drive.google.com/file/d/1BScMkyhnk7drAb-HnJvAjJ__DCkxAwP_/view" class="cert-image" alt="Certification 2">
+                    <img src="ehe.jpeg" alt="Certification 2" class="cert-image">
+                </a>
+                <a href="https://credly.com/badges/c1affcb8-5eca-465e-9cb1-386cdba88c63/public_url" class="cert-image" alt="Certification 3">
+                    <img src="cisco.png" alt="Certification 3" class="cert-image">
+                </a>
+        <!-- Add more certification images here -->
+            </div>
+        </div>
+
+        <!-- Date and Time Display -->
+        <div class="date-time" id="date-time"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
