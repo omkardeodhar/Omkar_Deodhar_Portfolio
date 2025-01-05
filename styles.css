@@ -11,6 +11,12 @@ body {
     color: #f0f0f0;
 }
 
+/* Remove default styles for links */
+a {
+    text-decoration: none; /* Removes the underline */
+    color: inherit; /* Inherits the color from the parent, so it doesn't turn blue */
+}
+
 .desktop {
     position: relative;
     width: 100vw;
@@ -58,12 +64,6 @@ body {
     font-weight: 700;
     text-align: center;
     color: black;
-}
-
-/* Remove default styles for links */
-a {
-    text-decoration: none; /* Removes the underline */
-    color: inherit; /* Inherits the color from the parent, so it doesn't turn blue */
 }
 
 /* Floating Dock at the Bottom */
@@ -196,12 +196,24 @@ a {
     background-color: red;
 }
 
+.red:hover {
+    background-color: darkred;
+}
+
 .yellow {
     background-color: yellow;
 }
 
+.yellow:hover {
+    background-color: #d4a017;
+}
+
 .green {
     background-color: green;
+}
+
+.green:hover {
+    background-color: darkgreen;
 }
 
 .red::after {
@@ -360,7 +372,110 @@ a {
     border-radius: 50%;
 }
 
+.certifications-window .red:hover {
+    background-color: darkred;
+}
+
 .certifications-window .red::after {
+    content: "X";
+    font-weight: bold;
+    color: white;
+    font-size: 12px;
+}
+
+/* Projects Window */
+.projects-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 800px;
+    height: 70%;
+    max-height: 600px;
+    background-color: #1d1f21;
+    display: none; /* Hidden by default */
+    border-radius: 10px;
+    z-index: 6;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    color: #f0f0f0;
+    transform: translate(-50%, -50%) scale(0.05); /* Initial state: small and transparent */
+    transition: opacity 0.4s ease, transform 0.4s ease; /* Transition for fade-in and sliding effect */
+}
+
+.projects-window.open {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Window Header */
+.window-header {
+    background-color: #2e3436;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.window-header span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #f0f0f0;
+}
+
+.projects-content {
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.proj-image {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth hover effect */
+}
+
+.proj-image:hover {
+    transform: scale(1.1); /* Slight zoom-in effect */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); /* Stronger shadow when hovered */
+}
+
+.projects-window .button {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.projects-window .red {
+    background-color: red;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+
+.projects-window .red:hover {
+    background-color: darkred;
+}
+
+.projects-window .red::after {
     content: "X";
     font-weight: bold;
     color: white;
@@ -390,6 +505,10 @@ a {
         width: 45px;
         height: 45px;
         transition: transform 0.4s ease;
+    }
+    
+    .date-time {
+        display: none;
     }
 }
 
@@ -434,37 +553,7 @@ a {
 
     /* Adjusting date-time layout */
     .date-time {
-        position: absolute;
-        bottom: 20px;
-        right: 10px;
-        font-size: 14px;
-        font-weight: 500;
-        color: #ffffff;
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 5px 8px; /* Padding based on content size */
-        border-radius: 5px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-end;
-        text-align: right;
-        max-width: 120px;
-    }
-
-    .date-time span {
-        margin: 2px;
-    }
-
-    .date-time .date {
-        font-size: 12px;
-    }
-
-    .date-time .time {
-        font-size: 14px;
-    }
-
-    .date-time .seconds {
-        font-size: 12px;
+        display: none;
     }
 }
 
@@ -494,41 +583,7 @@ a {
     .icon span, .dock span {
         font-size: 13px;
     }
-
-    .date-time {
-        position: absolute;
-        bottom: 20px;
-        right: 10px;
-        font-size: 14px;
-        font-weight: 500;
-        color: #ffffff;
-        background-color: rgba(0, 0, 0, 0.5);
-        padding: 5px 8px; /* Adjusted padding based on content size */
-        border-radius: 5px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-end;
-        text-align: right;
-        max-width: 100px;
-    }
-
-    .date-time span {
-        margin: 1px;
-    }
-
-    .date-time .date {
-        font-size: 10px;
-    }
-
-    .date-time .time {
-        font-size: 12px;
-    }
-
-    .date-time .seconds {
-        font-size: 10px;
-    }
-
+    
     .terminal-body {
         display: block;
         height: 100%;
@@ -539,14 +594,8 @@ a {
         max-width: 100%;
         font-size: 13px;
     }
+    
+    .date-time {
+        display: none;
+    }
 }
-
-
-
-
-
-
-
-
-
-

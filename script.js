@@ -119,7 +119,23 @@ document.getElementById('close-certifications').addEventListener('click', functi
     }, 400);
 });
 
+// Projects functionality
+const projectsWindow = document.getElementById('projects-window');
+document.getElementById('projects-icon').addEventListener('click', function () {
+    projectsWindow.style.display = 'block';
+    setTimeout(() => {
+        projectsWindow.classList.add('open'); // Add the open class for animation
+    }, 10);
+});
+
+document.getElementById('close-projects').addEventListener('click', function () {
+    projectsWindow.classList.remove('open'); // Remove open class for closing animation
+    setTimeout(() => {
+        projectsWindow.style.display = 'none';
+    }, 400);
+});
 // Open all links in new tabs
 document.querySelectorAll('.icons a').forEach(link => link.setAttribute('target', '_blank'));
 document.querySelectorAll('.certifications-content a').forEach(link => link.setAttribute('target', '_blank'));
+document.querySelectorAll('.projects-content a').forEach(link => link.setAttribute('target', '_blank'));
 
