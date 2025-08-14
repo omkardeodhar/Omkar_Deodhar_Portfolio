@@ -42,6 +42,7 @@ document.getElementById('terminal-icon').addEventListener('click', function () {
     terminalOutput.textContent = '';
     clearInterval(typingInterval);
     simulateTyping();
+    terminal.focus();
 });
 
 document.getElementById('close-terminal').addEventListener('click', function () {
@@ -62,6 +63,16 @@ document.getElementById('minimize-terminal').addEventListener('click', function 
 
 document.getElementById('fullscreen-terminal').addEventListener('click', function () {
     terminal.classList.toggle('fullscreen');
+});
+
+// Allow Enter/Space when dock icons are focused (keyboard accessible)
+document.querySelectorAll('.dock .icon').forEach(el => {
+    el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            el.click();
+        }
+    });
 });
 
 function simulateTyping() {
@@ -110,6 +121,7 @@ document.getElementById('folder-icon').addEventListener('click', function () {
     setTimeout(() => {
         certificationsWindow.classList.add('open'); // Add the open class for animation
     }, 10);
+    certificationsWindow.focus();
 });
 
 document.getElementById('close-certifications').addEventListener('click', function () {
@@ -126,6 +138,7 @@ document.getElementById('projects-icon').addEventListener('click', function () {
     setTimeout(() => {
         projectsWindow.classList.add('open'); // Add the open class for animation
     }, 10);
+    projectsWindow.focus();
 });
 
 document.getElementById('close-projects').addEventListener('click', function () {
@@ -134,8 +147,50 @@ document.getElementById('close-projects').addEventListener('click', function () 
         projectsWindow.style.display = 'none';
     }, 400);
 });
-// Open all links in new tabs
-document.querySelectorAll('.icons a').forEach(link => link.setAttribute('target', '_blank'));
-document.querySelectorAll('.certifications-content a').forEach(link => link.setAttribute('target', '_blank'));
-document.querySelectorAll('.projects-content a').forEach(link => link.setAttribute('target', '_blank'));
 
+// Experience functionality (NEW)
+const experienceWindow = document.getElementById('experience-window');
+document.getElementById('experience-icon').addEventListener('click', function () {
+    experienceWindow.style.display = 'block';
+    setTimeout(() => {
+        experienceWindow.classList.add('open'); // Add the open class for animation
+    }, 10);
+    experienceWindow.focus();
+});
+
+document.getElementById('close-experience').addEventListener('click', function () {
+    experienceWindow.classList.remove('open'); // Remove open class for closing animation
+    setTimeout(() => {
+        experienceWindow.style.display = 'none';
+    }, 400);
+});
+
+// Open all links in new tabs and add rel for security
+document.querySelectorAll('a').forEach(link => {
+    if (!link.target) link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener noreferrer');
+});
+
+// Allow closing open windows with Escape key (non-invasive)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        // close terminal if open
+        if (terminal.classList.contains('open')) {
+            document.getElementById('close-terminal').click();
+            return;
+        }
+        // close experience window
+        if (experienceWindow.classList.contains('open')) {
+            document.getElementById('close-experience').click();
+            return;
+        }
+        if (projectsWindow.classList.contains('open')) {
+            document.getElementById('close-projects').click();
+            return;
+        }
+        if (certificationsWindow.classList.contains('open')) {
+            document.getElementById('close-certifications').click();
+            return;
+        }
+    }
+});

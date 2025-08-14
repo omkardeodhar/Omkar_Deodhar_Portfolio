@@ -31,107 +31,136 @@
     <div class="desktop">
         <!-- Icons Section - Top Left -->
         <div class="icons">
-            <a href="https://drive.google.com/file/d/1YecvVBB2yB3grv3ivYRC3WfwJsuddoqj/view?usp=drive_link" class="icon" id="resume">
+            <a href="https://drive.google.com/file/d/1YecvVBB2yB3grv3ivYRC3WfwJsuddoqj/view?usp=drive_link" class="icon" id="resume" aria-label="Open Resume" target="_blank" rel="noopener noreferrer">
                 <img src="resume.png" alt="Resume">
                 <span>Resume</span>
             </a>
-            <a href="https://github.com/omkardeodhar" class="icon" id="github">
+            <a href="https://github.com/omkardeodhar" class="icon" id="github" aria-label="Open GitHub profile" target="_blank" rel="noopener noreferrer">
                 <img src="github.png" alt="GitHub">
                 <span>GitHub</span>
             </a>
-            <a href="https://tryhackme.com/r/p/InfoSentinel" class="icon" id="thm">
+            <a href="https://tryhackme.com/r/p/InfoSentinel" class="icon" id="thm" aria-label="Open TryHackMe profile" target="_blank" rel="noopener noreferrer">
                 <img src="thm.png" alt="THM Profile">
                 <span>THM</span>
             </a>
-            <a href="https://linkedin.com/in/omkar-deodhar-09933b27a" class="icon" id="linkedin">
+            <a href="https://linkedin.com/in/omkar-deodhar-09933b27a" class="icon" id="linkedin" aria-label="Open LinkedIn profile" target="_blank" rel="noopener noreferrer">
                 <img src="linkedin.png" alt="Linkedin">
                 <span>Linkedin</span>
             </a>
         </div>
 
         <!-- Floating Dock at the Bottom -->
-        <div class="dock">
-            <div class="icon" id="terminal-icon">
+        <div class="dock" role="toolbar" aria-label="Dock">
+            <div class="icon" id="terminal-icon" role="button" tabindex="0" aria-label="Open Terminal">
                 <img src="terminal.png" alt="Terminal">
                 <span>Terminal</span>
             </div>
-            <div class="icon" id="folder-icon">
+            <div class="icon" id="folder-icon" role="button" tabindex="0" aria-label="Open Certifications">
                 <img src="folder.png" alt="Folder">
                 <span>Certifications</span>
             </div>
-            <div class="icon" id="projects-icon">
+            <div class="icon" id="projects-icon" role="button" tabindex="0" aria-label="Open Projects">
                 <img src="projects.png" alt="Projects">
                 <span>Projects</span>
+            </div>
+            <!-- Experience Icon uses exp.png as requested -->
+            <div class="icon" id="experience-icon" role="button" tabindex="0" aria-label="Open Experience">
+                <img src="exp.png" alt="Experience">
+                <span>Experience</span>
             </div>
         </div>
 
         <!-- Terminal Section (Initially Hidden) -->
-        <div class="terminal" id="terminal">
+        <div class="terminal" id="terminal" role="dialog" aria-modal="true" tabindex="-1">
             <div class="terminal-window">
                 <div class="terminal-header">
-                    <div class="button yellow" id="minimize-terminal"></div>
-                    <div class="button green" id="fullscreen-terminal"></div>
-                    <div class="button red" id="close-terminal"></div>
+                    <div class="button yellow" id="minimize-terminal" title="Minimize"></div>
+                    <div class="button green" id="fullscreen-terminal" title="Fullscreen"></div>
+                    <div class="button red" id="close-terminal" title="Close"></div>
                 </div>
                 <div class="terminal-prompt">
                     <span class="prompt-text">Summary@Omkar-Deodhar:~$</span>
                 </div>
                 <div class="terminal-body">
-                    <pre id="terminal-output"></pre>
+                    <pre id="terminal-output" aria-live="polite"></pre>
                 </div>
             </div>
         </div>
-        
-        <div class="certifications-window" id="certifications-window">
+
+        <div class="certifications-window" id="certifications-window" role="dialog" aria-modal="true" tabindex="-1">
             <div class="window-header">
-                <div class="button red" id="close-certifications"></div>
+                <div class="button red" id="close-certifications" title="Close"></div>
                 <span>Certifications</span>
             </div>
             <div class="certifications-content">
-                <!-- <a href="https://www.flaticon.com/free-icons/folder" title="folder icons">Folder icons created by kmg design - Flaticon</a> -->
-                <a href="https://coursera.org/account/accomplishments/professional-cert/7567B8HDH3T5" class="cert-image" alt="Certification 1">
+                <a href="https://coursera.org/account/accomplishments/professional-cert/7567B8HDH3T5" class="cert-image" alt="Certification 1" target="_blank" rel="noopener noreferrer">
                     <img src="google.jpeg" alt="Certification 1" class="cert-image">
                 </a>
-                <a href="https://drive.google.com/file/d/1BScMkyhnk7drAb-HnJvAjJ__DCkxAwP_/view" class="cert-image" alt="Certification 2">
+                <a href="https://drive.google.com/file/d/1BScMkyhnk7drAb-HnJvAjJ__DCkxAwP_/view" class="cert-image" alt="Certification 2" target="_blank" rel="noopener noreferrer">
                     <img src="ehe.jpeg" alt="Certification 2" class="cert-image">
                 </a>
-                <a href="https://credly.com/badges/c1affcb8-5eca-465e-9cb1-386cdba88c63/public_url" class="cert-image" alt="Certification 3">
+                <a href="https://credly.com/badges/c1affcb8-5eca-465e-9cb1-386cdba88c63/public_url" class="cert-image" alt="Certification 3" target="_blank" rel="noopener noreferrer">
                     <img src="cisco.png" alt="Certification 3" class="cert-image">
                 </a>
-                    <!-- Add more certification images here -->
             </div>
         </div>
-        
-        <div class="projects-window" id="projects-window">
+
+        <div class="projects-window" id="projects-window" role="dialog" aria-modal="true" tabindex="-1">
             <div class="window-header">
-                <div class="button red" id="close-projects"></div>
+                <div class="button red" id="close-projects" title="Close"></div>
                 <span>Projects</span>
             </div>
             <div class="projects-content">
-                <a href="https://github.com/omkardeodhar/SIH_Webcrawler" class="proj-image" alt="Project 1">
+                <a href="https://github.com/omkardeodhar/SIH_Webcrawler" class="proj-image" alt="Project 1" target="_blank" rel="noopener noreferrer">
                     <img src="crawler.jpg" alt="Project 1" class="proj-image">
                 </a>
-                
-                <a href="https://github.com/omkardeodhar/ShadowScan" class="proj-image" alt="Project 2">
+
+                <a href="https://github.com/omkardeodhar/ShadowScan" class="proj-image" alt="Project 2" target="_blank" rel="noopener noreferrer">
                     <img src="scanner.jpg" alt="Project 2" class="proj-image">
                 </a>
-                
-                <a href="https://github.com/omkardeodhar/Shadow_Sniff" class="proj-image" alt="Project 3">
+
+                <a href="https://github.com/omkardeodhar/Shadow_Sniff" class="proj-image" alt="Project 3" target="_blank" rel="noopener noreferrer">
                     <img src="sniffer.jpg" alt="Project 3" class="proj-image">
                 </a>
-                
-                <a href="https://github.com/omkardeodhar/URL_Classification_Engine" class="proj-image" alt="Project 4">
+
+                <a href="https://github.com/omkardeodhar/URL_Classification_Engine" class="proj-image" alt="Project 4" target="_blank" rel="noopener noreferrer">
                     <img src="url.png" alt="Project 4" class="proj-image">
                 </a>
-                    <!-- Add more certification images here -->
             </div>
         </div> 
 
+        <!-- Experience Window (new) - uses the same window styling/animation as other windows -->
+        <div class="projects-window" id="experience-window" role="dialog" aria-modal="true" tabindex="-1">
+            <div class="window-header">
+                <div class="button red" id="close-experience" title="Close"></div>
+                <span>Experience</span>
+            </div>
+            <div class="projects-content experience-content">
+                <div class="exp-item">
+                    <h3>Cyber Security Intern - Kirtane &amp; Pandit LLP, Pune, India <span class="dates">Jun 2025 – Present</span></h3>
+                    <ul>
+                        <li>Led a phishing simulation campaign with GCP VM provisioning and Nginx reverse proxy configuration, achieving a 76% successful phish rate among recipients who opened the email.</li>
+                        <li>Built and maintained Active Directory / Windows lab environments to explore authentication, privilege escalation, and security.</li>
+                        <li>Conducted network assessments using Nessus and OpenVAS and validated fixes after remediation.</li>
+                        <li>Gained exposure to audit requirements and regulatory standards in RBI, IRDAI, and ISO-governed industries.</li>
+                    </ul>
+                </div>
+
+                <div class="exp-item">
+                    <h3>Security Researcher - Freelance, Pune, India <span class="dates">Feb 2025 – May 2025</span></h3>
+                    <ul>
+                        <li>Conducted WAPT / VAPT, uncovering 12+ OWASP Top 10 issues (broken access control, information disclosure, XSS, etc.).</li>
+                        <li>Delivered 4+ VAPT reports with 30+ prioritized remediation steps aligned with OWASP and compliance frameworks.</li>
+                        <li>Handled responsible disclosure, coordinated with stakeholders to fix issues, and re-tested to confirm remediation.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <!-- Date and Time Display -->
-        <div class="date-time" id="date-time"></div>
+        <div class="date-time" id="date-time" aria-hidden="true"></div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
